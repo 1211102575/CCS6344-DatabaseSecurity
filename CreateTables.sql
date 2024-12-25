@@ -1,0 +1,46 @@
+CREATE TABLE Users (
+	UserID INT PRIMARY KEY IDENTITY(1,1),
+	UserName NVARCHAR(50) NOT NULL,
+	PasswordHash NVARCHAR(255) NOT NULL,
+	RoleID INT NOT NULL,
+	Email NVARCHAR(100),
+	Phone NVARCHAR(20)
+);
+
+CREATE TABLE Roles (
+	RoleID INT PRIMARY KEY IDENTITY(1,1),
+	RoleName NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Products (
+	ProductID INT PRIMARY KEY IDENTITY(1,1),
+	ProductName NVARCHAR(100) NOT NULL,
+	CategoryID INT NOT NULL,
+	SupplierID INT NOT NULL,
+	Quantity INT NOT NULL,
+	Price DECIMAL(10,2) NOT NULL,
+	ReorderLevel INT NOT NULL
+);
+
+CREATE TABLE Categories (
+	CategoryID INT PRIMARY KEY  IDENTITY(1,1),
+	CategoryName NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Suppliers (
+	SupplierID INT PRIMARY KEY IDENTITY(1,1),
+	SupplierName NVARCHAR(100) NOT NULL,
+	ContactName NVARCHAR(100),
+	ContactEmail NVARCHAR(100),
+	Phone NVARCHAR(20)
+);
+
+CREATE TABLE InventoryTransactions (
+	TransactionID INT PRIMARY KEY IDENTITY(1,1),
+	ProductID INT NOT NULL,
+	Quantity INT NOT NULL,
+	TransactionType NVARCHAR(50) NOT NULL,
+	TransactionDate DATETIME NOT NULL,
+	UserID INT NOT NULL,
+	FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
+);
