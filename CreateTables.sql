@@ -108,7 +108,7 @@ CREATE TABLE OrderSchema.PurchaseOrderDetails (
 );
 
 /* CREATE ACTION LOG TABLE */
-CREATE TABLE ActionLogs (
+CREATE TABLE UserSchema.ActionLogs (
 	LogID INT PRIMARY KEY IDENTITY(1,1),
 	Action NVARCHAR(100),
 	ActionUser NVARCHAR(50),
