@@ -47,13 +47,20 @@ CREATE TABLE CustomerSchema.Customers (
 );
 
 CREATE TABLE InventorySchema.InventoryTransactions (
-	TransactionID INT PRIMARY KEY IDENTITY(1,1),
-	ProductID INT NOT NULL,
-	Quantity INT NOT NULL,
-	TransactionType NVARCHAR(50) NOT NULL,
-	TransactionDate DATETIME NOT NULL,
-	UserID INT NOT NULL,
-	FOREIGN KEY (ProductID) REFERENCES ProductSchema.Products(ProductID)
+    TransactionID INT PRIMARY KEY IDENTITY(1,1),
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    TransactionType NVARCHAR(50) NOT NULL,
+    TransactionDate DATETIME NOT NULL,
+    UserID INT NOT NULL,
+    Price DECIMAL(10,2),
+    SupplierID INT,
+    CustomerID INT,
+    TotalAmount AS (Quantity * Price),
+    FOREIGN KEY (ProductID) REFERENCES ProductSchema.Products(ProductID),
+    FOREIGN KEY (UserID) REFERENCES UserSchema.Users(UserID),
+    FOREIGN KEY (SupplierID) REFERENCES SupplierSchema.Suppliers(SupplierID),
+    FOREIGN KEY (CustomerID) REFERENCES CustomerSchema.Customers(CustomerID)
 );
 
 CREATE TABLE ProductSchema.ProductSuppliers (
