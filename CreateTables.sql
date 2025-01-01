@@ -51,7 +51,7 @@ CREATE TABLE InventorySchema.InventoryTransactions (
     ProductID INT NOT NULL,
     Quantity INT NOT NULL,
     TransactionType NVARCHAR(50) NOT NULL,
-    TransactionDate DATETIME NOT NULL,
+    TransactionDate DATE GETDATE(),
     UserID INT NOT NULL,
     Price DECIMAL(10,2),
     SupplierID INT,
