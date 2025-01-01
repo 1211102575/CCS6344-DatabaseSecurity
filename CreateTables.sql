@@ -79,12 +79,8 @@ CREATE TABLE InventorySchema.StockLevels (
 CREATE TABLE OrderSchema.SalesOrders (
 	OrderID INT PRIMARY KEY IDENTITY(1,1),
 	CustomerID INT,
-	OrderDate DATETIME DEFAULT GETDATE(),
-	TotalAmount AS ( 
-		SELECT SUM(OD.Quantity * OD.Price) 
-		FROM OrderSchema.OrderDetails OD 
-		WHERE OD.OrderID = SalesOrders.OrderID
-	),
+	CustomerDate DATETIME NOT NULL,
+	TotalAmount DECIMAL(10,2),
 	Status NVARCHAR(50),
 	FOREIGN KEY (CustomerID) REFERENCES CustomerSchema.Customers(CustomerID)
 );
@@ -95,7 +91,6 @@ CREATE TABLE OrderSchema.OrderDetails (
 	ProductID INT,
 	Quantity INT,
 	Price DECIMAL(10,2),
-	Total AS (Quantity * Price),
 	FOREIGN KEY (OrderID) REFERENCES OrderSchema.SalesOrders(OrderID),
 	FOREIGN KEY (ProductID) REFERENCES ProductSchema.Products(ProductID)
 );
@@ -103,12 +98,8 @@ CREATE TABLE OrderSchema.OrderDetails (
 CREATE TABLE OrderSchema.PurchaseOrders (
 	PurchaseOrderID INT PRIMARY KEY IDENTITY(1,1),
 	SupplierID INT,
-	OrderDate DATETIME DEFAULT GETDATE(),
-	TotalAmount AS
-		SELECT SUM(PD.Quantity * PD.Price)
-		FROM OrderSchema.PurchaseOrderDetails PD
-		WHERE PD.PurchaseOrderID = PurchaseOrders.PurchaseOrderID
-	),
+	OrderDate DATETIME NOT NULL,
+	TotalAmount DECIMAL(10,2),
 	Status NVARCHAR(50),
 	FOREIGN KEY (SupplierID) REFERENCES SupplierSchema.Suppliers(SupplierID)
 );
@@ -119,7 +110,6 @@ CREATE TABLE OrderSchema.PurchaseOrderDetails (
 	ProductID INT,
 	Quantity INT,
 	Price DECIMAL(10,2),
-	Total AS (Quantity * Price),
 	FOREIGN KEY (PurchaseOrderID) REFERENCES OrderSchema.PurchaseOrders(PurchaseOrderID),
 	FOREIGN KEY (ProductID) REFERENCES ProductSchema.Products(ProductID)
 );
