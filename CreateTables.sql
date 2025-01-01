@@ -91,6 +91,7 @@ CREATE TABLE OrderSchema.OrderDetails (
 	ProductID INT,
 	Quantity INT,
 	Price DECIMAL(10,2),
+	Total AS (Quantity * Price),
 	FOREIGN KEY (OrderID) REFERENCES OrderSchema.SalesOrders(OrderID),
 	FOREIGN KEY (ProductID) REFERENCES ProductSchema.Products(ProductID)
 );
