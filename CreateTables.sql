@@ -114,7 +114,7 @@ CREATE TABLE OrderSchema.PurchaseOrders (
 );
 
 CREATE TABLE OrderSchema.PurchaseOrderDetails (
-	PurchaseOrdeerDetailID INT PRIMARY KEY IDENTITY(1,1),
+	PurchaseOrderDetailID INT PRIMARY KEY IDENTITY(1,1),
 	PurchaseOrderID INT,
 	ProductID INT,
 	Quantity INT,
