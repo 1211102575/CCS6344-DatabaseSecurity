@@ -1,4 +1,0 @@
-USE MASTER;
-CREATE SERVER AUDIT SPECIFICATION [ServerAuditSpecification-InventoryManagementSystem]
-FOR SERVER AUDIT [ServerAudit]
-ADD (FAILED_LOGIN_GROUP);
