@@ -1,6 +1,17 @@
 Use InventoryManagementSystem ;
 GO 
 /* CREATE TABLE */
+
+CREATE TABLE UserSchema.Roles (
+	RoleID INT PRIMARY KEY IDENTITY(1,1),
+	RoleName NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ProductSchema.Categories (
+	CategoryID INT PRIMARY KEY  IDENTITY(1,1),
+	CategoryName NVARCHAR(50) NOT NULL
+);
+
 CREATE TABLE UserSchema.Users (
 	UserID INT PRIMARY KEY IDENTITY(1,1),
 	UserName NVARCHAR(50) NOT NULL,
@@ -11,28 +22,6 @@ CREATE TABLE UserSchema.Users (
 	FOREIGN KEY (RoleID) REFERENCES UserSchema.Roles(RoleID),
 );
 
-CREATE TABLE UserSchema.Roles (
-	RoleID INT PRIMARY KEY IDENTITY(1,1),
-	RoleName NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE ProductSchema.Products (
-	ProductID INT PRIMARY KEY IDENTITY(1,1),
-	ProductName NVARCHAR(100) NOT NULL,
-	CategoryID INT NOT NULL,
-	SupplierID INT NOT NULL,
-	Quantity INT NOT NULL,
-	Price DECIMAL(10,2) NOT NULL,
-	ReorderLevel INT NOT NULL,
-	FOREIGN KEY (CategoryID) REFERENCES ProductSchema.Categories(CategoryID),
-	FOREIGN KEY (SupplierID) REFERENCES SupplierSchema.Suppliers(SupplierID),
-	
-);
-
-CREATE TABLE ProductSchema.Categories (
-	CategoryID INT PRIMARY KEY  IDENTITY(1,1),
-	CategoryName NVARCHAR(50) NOT NULL
-);
 
 CREATE TABLE SupplierSchema.Suppliers (
 	SupplierID INT PRIMARY KEY IDENTITY(1,1),
@@ -49,6 +38,21 @@ CREATE TABLE CustomerSchema.Customers (
     Phone NVARCHAR(20),
     Address NVARCHAR(255)
 );
+
+CREATE TABLE ProductSchema.Products (
+	ProductID INT PRIMARY KEY IDENTITY(1,1),
+	ProductName NVARCHAR(100) NOT NULL,
+	CategoryID INT NOT NULL,
+	SupplierID INT NOT NULL,
+	Quantity INT NOT NULL,
+	Price DECIMAL(10,2) NOT NULL,
+	ReorderLevel INT NOT NULL,
+	FOREIGN KEY (CategoryID) REFERENCES ProductSchema.Categories(CategoryID),
+	FOREIGN KEY (SupplierID) REFERENCES SupplierSchema.Suppliers(SupplierID),
+	
+);
+
+
 
 CREATE TABLE InventorySchema.InventoryTransactions (
     TransactionID INT PRIMARY KEY IDENTITY(1,1),
