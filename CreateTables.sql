@@ -7,7 +7,8 @@ CREATE TABLE UserSchema.Users (
 	PasswordHash NVARCHAR(255) NOT NULL,
 	RoleID INT NOT NULL,
 	Email NVARCHAR(100),
-	Phone NVARCHAR(20)
+	Phone NVARCHAR(20),
+	FOREIGN KEY (RoleID) REFERENCES UserSchema.Roles(RoleID),
 );
 
 CREATE TABLE UserSchema.Roles (
@@ -22,7 +23,10 @@ CREATE TABLE ProductSchema.Products (
 	SupplierID INT NOT NULL,
 	Quantity INT NOT NULL,
 	Price DECIMAL(10,2) NOT NULL,
-	ReorderLevel INT NOT NULL
+	ReorderLevel INT NOT NULL,
+	FOREIGN KEY (CategoryID) REFERENCES ProductSchema.Categories(CategoryID),
+	FOREIGN KEY (SupplierID) REFERENCES SupplierSchema.Suppliers(SupplierID),
+	
 );
 
 CREATE TABLE ProductSchema.Categories (
