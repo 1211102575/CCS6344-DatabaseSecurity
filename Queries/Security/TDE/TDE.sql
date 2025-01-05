@@ -1,4 +1,4 @@
-USE master
+USE master;
 GO
 
 CREATE CERTIFICATE TDECert WITH SUBJECT = 'Certificate For TDE';
