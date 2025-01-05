@@ -1,0 +1,11 @@
+OPEN MASTER KEY DECRYPTION BY PASSWORD = 'Password!123';
+
+CREATE CERTIFICATE PhoneCertificate
+WITH SUBJECT = 'Certificate for Phone Encryption';
+
+CREATE SYMMETRIC KEY PhoneKey
+WITH ALGORITHM = AES_256
+ENCRYPTION BY CERTIFICATE PhoneCertificate;
+
+ALTER TABLE UserSchema.Users
+ADD PhoneEncrypted VARBINARY(MAX);
